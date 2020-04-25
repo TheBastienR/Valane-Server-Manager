@@ -1,0 +1,13 @@
+{
+    "port": 2301,
+    "servers": [
+        {
+            "name": "Serveur 1",
+            "path": "/home/Server1"
+        },
+        {
+            "name": "Serveur 2",
+            "path": "/home/Server2"
+        }
+    ]
+}
