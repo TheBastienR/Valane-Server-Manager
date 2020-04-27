@@ -25,17 +25,12 @@ form{
 
 input{
     width: 30vh;
-    margin-top: 15px;
-}
-
-input[type = "text"]{
-    padding: 5px;
-    font-family: "Comfortaa";
 }
 
 input[type = "password"]{
     padding: 5px;
     font-family: "Comfortaa";
+    margin-bottom: 15px;
 }
 
 

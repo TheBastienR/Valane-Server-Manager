@@ -3,6 +3,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
 let configFile = require("./config/general.json")
+let passFile = require("./config/pass.json")
+let isConnected = false;
 
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname));
@@ -15,7 +17,25 @@ app.get('/', function (req, res){
 });
 
 app.post('/', function(req, res){
-    res.send("<h1>Work In Progress...</h1>")
+    if(req.body.pass != passFile.pass){
+        isConnected = false
+    }else{
+        res.redirect("/panel")
+        isConnected = true
+    }
+});
+
+app.get('/panel', function (req, res){
+    if(isConnected){
+        res.render("pages/panel.ejs");   
+    }else{
+        res.redirect('/')
+    }
+});
+
+app.get('/logout', function (req, res){
+    res.redirect('/');
+    isConnected = false  
 });
 
 
