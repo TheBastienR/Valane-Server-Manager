@@ -13,5 +13,13 @@
         <img src="static/assets/banner.png" alt="banner">
         <a href="/logout"><i class="fas fa-sign-out-alt"></i></a>
     </header>
+    <% servers.forEach(function(server){ %>
+        <div class="server">
+            <h1><%= server.name %> </h1>
+            <p><%= server.isValid %> </p>
+        </div>
+    <% }); %>
+
+    
 </body>
 </html>

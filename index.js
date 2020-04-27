@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const path = require('path')
 let configFile = require("./config/general.json")
 let passFile = require("./config/pass.json")
 let isConnected = false;
@@ -26,8 +27,21 @@ app.post('/', function(req, res){
 });
 
 app.get('/panel', function (req, res){
+    let servers = []
     if(isConnected){
-        res.render("pages/panel.ejs");   
+        configFile.servers.forEach(server => {
+            if(fs.existsSync(path.join(server.path, "server.properties"))){
+                servers.push({"name": server.name, "isValid": true, "logFile": path.join(server.path, "logs", "latest.log")})
+            }else{
+                servers.push({"name": server.name, "isValid": false})
+            }
+        });
+        res.render("pages/panel.ejs", {
+            isConnected: isConnected,
+            servers: servers
+            
+            
+        });   
     }else{
         res.redirect('/')
     }
